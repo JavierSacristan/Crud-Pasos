@@ -14,6 +14,8 @@ window.onload = function () {
     bModificar=document.getElementById("bModificar");
     bBorrar=document.getElementById("bBorrar");
     bTabla=document.getElementById("bTabla");
+    bGrabar=document.getElementById("bGrabar");
+    bNuevo=document.getElementById("bNuevo");
     posicion=0;
 
     cargarXml();
@@ -21,6 +23,8 @@ window.onload = function () {
     bSiguiente.addEventListener("click", registroSiguiente, false);
     bAnterior.addEventListener("click", registroAnterior, false);
     bModificar.addEventListener("click", modificarRegistro, false);
+    bLimpiar.addEventListener("click", nuevo, false);
+    bGrabar.addEventListener("click", grabar, false);
     bBorrar.addEventListener("click", borrarRegistro, false);
     bTabla.addEventListener("click", imprimirentabla, false);
 }
@@ -92,6 +96,21 @@ function borrarRegistro(){
 
     posicion=0;
     mostrarRegistro(posicion);
+}
+
+function nuevo(){
+    Id.value="";
+    Direccion.value="";
+    Latitud.value="";
+    Longitud.value="";
+
+}
+
+function grabar(){
+    aId.push(Id.value);
+    aDireccion.push(Direccion.value);
+    aLatitud.push(Latitud.value);
+    aLongitud.push(Longitud.value);
 }
 
 function imprimirentabla() {
