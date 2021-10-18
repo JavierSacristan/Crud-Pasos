@@ -1,9 +1,9 @@
 window.onload = function () {
-    //creo los arrays en los que guardare la informacion del xml
-    var arrayId=new Array();
-    var arrayDireccion=new Array();
-    var arrayLatitud=new Array();
-    var arrayLongitud=new Array();
+    //creo los arrays en los que guardare los datos
+    aId=new Array();
+    aDireccion=new Array();
+    aLatitud=new Array();
+    aLongitud=new Array();
 
     Id=document.getElementById("id");
     Direccion=document.getElementById("direccion");
@@ -13,6 +13,7 @@ window.onload = function () {
     bAnterior=document.getElementById("bAnterior");
     bModificar=document.getElementById("bModificar");
     bBorrar=document.getElementById("bBorrar");
+    bTabla=document.getElementById("bTabla");
     posicion=0;
 
     cargarXml();
@@ -21,6 +22,7 @@ window.onload = function () {
     bAnterior.addEventListener("click", registroAnterior, false);
     bModificar.addEventListener("click", modificarRegistro, false);
     bBorrar.addEventListener("click", borrarRegistro, false);
+    bTabla.addEventListener("click", imprimirentabla, false);
 }
 
 function cargarXml(){
@@ -36,23 +38,31 @@ function cargarXml(){
     arrayDireccion=myXML.getElementsByTagName("direccion");
     arrayLatitud=myXML.getElementsByTagName("latitud");
     arrayLongitud=myXML.getElementsByTagName("longitud");
-        
+
+    //guardo en arrays lo que obtengo del xml
+    for (i=0; i<arrayId.length; i++){
+        aId[i]=arrayId[i].firstChild.nodeValue;
+        aDireccion[i]=arrayDireccion[i].firstChild.nodeValue;
+        aLatitud[i]=arrayLatitud[i].firstChild.nodeValue;
+        aLongitud[i]=arrayLongitud[i].firstChild.nodeValue;
+    }
+    
     mostrarRegistro();
     
 }
 
 function mostrarRegistro(){
     //Visualizar el registro correspondiente a la posicion
-    Id.value=arrayId[posicion].firstChild.nodeValue;
-    Direccion.value=arrayDireccion[posicion].firstChild.nodeValue;
-    Latitud.value=arrayLatitud[posicion].firstChild.nodeValue;
-    Longitud.value=arrayLongitud[posicion].firstChild.nodeValue;
+    Id.value=aId[posicion];
+    Direccion.value=aDireccion[posicion];
+    Latitud.value=aLatitud[posicion];
+    Longitud.value=aLongitud[posicion];
 }
 
 function registroSiguiente(){
     posicion++;
 
-    if (posicion>arrayId.length-1){
+    if (posicion>aId.length-1){
         posicion=0;
     }
     mostrarRegistro();
@@ -68,18 +78,53 @@ function registroAnterior(){
 }
 
 function modificarRegistro(){
-    arrayId[posicion].firstChild.nodeValue=Id.value;
-    arrayDireccion[posicion].firstChild.nodeValue=Direccion.value;
-    arrayLatitud[posicion].firstChild.nodeValue=Latitud.value;
-    arrayLongitud[posicion].firstChild.nodeValue=Longitud.value;
+    aId[posicion]=Id.value;
+    aDireccion[posicion]=Direccion.value;
+    aLatitud[posicion]=Latitud.value;
+    aLongitud[posicion]=Longitud.value;
 }
 
 function borrarRegistro(){
-    arrayId.splice(posicion,1);
-    arrayDireccion.splice(posicion,1);
-    arrayLatitud.splice(posicion,1);
-    arrayLongitud.splice(posicion,1);
+    aId.splice(posicion,1);
+    aDireccion.splice(posicion,1);
+    aLatitud.splice(posicion,1);
+    aLongitud.splice(posicion,1);
 
     posicion=0;
     mostrarRegistro(posicion);
+}
+
+function imprimirentabla() {
+    for (c = 0; c < aId.length; c++) {
+        var tabla = document.getElementById("tabla");
+        var cuerpo = document.getElementById("cuerpo");
+        linea = document.createElement("tr");
+        parrafo = document.createElement("p");
+        dato = document.createTextNode(aId[c]);
+        Columna = document.createElement("td");
+        Columna.appendChild(dato);
+        linea.appendChild(Columna);
+
+        parrafo = document.createElement("p");
+        dato = document.createTextNode(aDireccion[c]);
+        Columna = document.createElement("td");
+        Columna.appendChild(dato);
+        linea.appendChild(Columna)
+
+        parrafo = document.createElement("p");
+        dato = document.createTextNode(aLatitud[c]);
+        Columna = document.createElement("td");
+        Columna.appendChild(dato);
+        linea.appendChild(Columna)
+
+        parrafo = document.createElement("p");
+        dato = document.createTextNode(aLongitud[c]);
+        Columna = document.createElement("td");
+        Columna.appendChild(dato);
+        linea.appendChild(Columna)
+
+        cuerpo.appendChild(linea);
+        
+    }
+    tabla.appendChild(cuerpo);
 }
