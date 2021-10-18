@@ -23,7 +23,7 @@ window.onload = function () {
     bSiguiente.addEventListener("click", registroSiguiente, false);
     bAnterior.addEventListener("click", registroAnterior, false);
     bModificar.addEventListener("click", modificarRegistro, false);
-    bLimpiar.addEventListener("click", nuevo, false);
+    bNuevo.addEventListener("click", nuevo, false);
     bGrabar.addEventListener("click", grabar, false);
     bBorrar.addEventListener("click", borrarRegistro, false);
     bTabla.addEventListener("click", imprimirentabla, false);
