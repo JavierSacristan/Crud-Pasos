@@ -1,11 +1,11 @@
 window.onload = function () {
     //creo los arrays en los que guardare los datos
-    aId=new Array();
+    aIdRegistro=new Array();
     aDireccion=new Array();
     aLatitud=new Array();
     aLongitud=new Array();
 
-    Id=document.getElementById("id");
+    IdRegistro=document.getElementById("IdRegistro");
     Direccion=document.getElementById("direccion");
     Latitud=document.getElementById("latitud");
     Longitud=document.getElementById("longitud");
@@ -38,14 +38,14 @@ function cargarXml(){
 
    
     //guardo en los arrays la informacion del xml
-    arrayId=myXML.getElementsByTagName("id");
+    arrayIdRegistro=myXML.getElementsByTagName("idRegistro");
     arrayDireccion=myXML.getElementsByTagName("direccion");
     arrayLatitud=myXML.getElementsByTagName("latitud");
     arrayLongitud=myXML.getElementsByTagName("longitud");
 
     //guardo en arrays lo que obtengo del xml
-    for (i=0; i<arrayId.length; i++){
-        aId[i]=arrayId[i].firstChild.nodeValue;
+    for (i=0; i<arrayIdRegistro.length; i++){
+        aIdRegistro[i]=arrayIdRegistro[i].firstChild.nodeValue;
         aDireccion[i]=arrayDireccion[i].firstChild.nodeValue;
         aLatitud[i]=arrayLatitud[i].firstChild.nodeValue;
         aLongitud[i]=arrayLongitud[i].firstChild.nodeValue;
@@ -57,7 +57,7 @@ function cargarXml(){
 
 function mostrarRegistro(){
     //Visualizar el registro correspondiente a la posicion
-    Id.value=aId[posicion];
+    IdRegistro.value=aIdRegistro[posicion];
     Direccion.value=aDireccion[posicion];
     Latitud.value=aLatitud[posicion];
     Longitud.value=aLongitud[posicion];
@@ -66,7 +66,7 @@ function mostrarRegistro(){
 function registroSiguiente(){
     posicion++;
 
-    if (posicion>aId.length-1){
+    if (posicion>aIdRegistro.length-1){
         posicion=0;
     }
     mostrarRegistro();
@@ -82,14 +82,14 @@ function registroAnterior(){
 }
 
 function modificarRegistro(){
-    aId[posicion]=Id.value;
+    aIdRegistro[posicion]=IdRegistro.value;
     aDireccion[posicion]=Direccion.value;
     aLatitud[posicion]=Latitud.value;
     aLongitud[posicion]=Longitud.value;
 }
 
 function borrarRegistro(){
-    aId.splice(posicion,1);
+    aIdRegistro.splice(posicion,1);
     aDireccion.splice(posicion,1);
     aLatitud.splice(posicion,1);
     aLongitud.splice(posicion,1);
@@ -99,7 +99,7 @@ function borrarRegistro(){
 }
 
 function nuevo(){
-    Id.value="";
+    IdRegistro.value="";
     Direccion.value="";
     Latitud.value="";
     Longitud.value="";
@@ -107,19 +107,19 @@ function nuevo(){
 }
 
 function grabar(){
-    aId.push(Id.value);
+    aIdRegistro.push(IdRegistro.value);
     aDireccion.push(Direccion.value);
     aLatitud.push(Latitud.value);
     aLongitud.push(Longitud.value);
 }
 
 function imprimirentabla() {
-    for (c = 0; c < aId.length; c++) {
+    for (c = 0; c < aIdRegistro.length; c++) {
         var tabla = document.getElementById("tabla");
         var cuerpo = document.getElementById("cuerpo");
         linea = document.createElement("tr");
         parrafo = document.createElement("p");
-        dato = document.createTextNode(aId[c]);
+        dato = document.createTextNode(aIdRegistro[c]);
         Columna = document.createElement("td");
         Columna.appendChild(dato);
         linea.appendChild(Columna);
