@@ -17,6 +17,7 @@ window.onload = function () {
     bGrabar=document.getElementById("bGrabar");
     bNuevo=document.getElementById("bNuevo");
     posicion=0;
+    contador=0;
 
     cargarXml();
 
@@ -132,7 +133,7 @@ function visualizaMarcador(latitud, longitud){
 }
 
 function imprimirentabla() {
-    for (c = 0; c < aIdRegistro.length; c++) {
+    for (c = contador; c < aIdRegistro.length; c++) {
         var tabla = document.getElementById("tabla");
         var cuerpo = document.getElementById("cuerpo");
         linea = document.createElement("tr");
@@ -162,7 +163,7 @@ function imprimirentabla() {
 
         cuerpo.appendChild(linea);
         visualizaMarcador(aLatitud[c], aLongitud[c]);
-
+        contador++;
     }
     tabla.appendChild(cuerpo);
     
