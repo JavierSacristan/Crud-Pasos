@@ -113,6 +113,24 @@ function grabar(){
     aLongitud.push(Longitud.value);
 }
 
+function visualizaMarcador(latitud, longitud){
+    var latlog = new google.maps.LatLng(latitud, longitud);
+
+    var icono = {
+        url: "./imagenes/curso.png", // url
+        scaledSize: new google.maps.Size(25, 25), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+    };
+
+    var marker = new google.maps.Marker({
+        position: latlog,
+        icon: icono,
+        map: map,
+        nombre: 'Pepino'
+    });
+}
+
 function imprimirentabla() {
     for (c = 0; c < aIdRegistro.length; c++) {
         var tabla = document.getElementById("tabla");
@@ -143,27 +161,9 @@ function imprimirentabla() {
         linea.appendChild(Columna)
 
         cuerpo.appendChild(linea);
-        
+        visualizaMarcador(aLatitud[c], aLongitud[c]);
+
     }
     tabla.appendChild(cuerpo);
-    visualizaMarcador(alatitud, alongitud);
     
-}
-
-function visualizaMarcador(latitud, longitud){
-    var latlog = new google.maps.LatLng(latitud, longitud);
-
-    var icono = {
-        url: "./imagenes/curso.png", // url
-        scaledSize: new google.maps.Size(25, 25), // scaled size
-        origin: new google.maps.Point(0,0), // origin
-        anchor: new google.maps.Point(0, 0) // anchor
-    };
-
-    var marker = new google.maps.Marker({
-        position: latlog,
-        icon: icono,
-        map: map,
-        nombre: 'Pepino'
-    });
 }
